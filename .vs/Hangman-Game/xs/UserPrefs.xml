@@ -1,0 +1,39 @@
+﻿<Properties StartupConfiguration="{3E440FB7-178E-43F2-A83C-7CB16018FA7C}|Default">
+  <MonoDevelop.Ide.ItemProperties.Hangman-Game PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Hangman-Game/GameEngine.cs">
+    <Files>
+      <File FileName="Hangman-Game/MainWindow.cs" Line="9" Column="25" />
+      <File FileName="Hangman-Game/GameEngine.cs" Line="9" Column="19" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Hangman-Game" expanded="True">
+            <Node name="Content" expanded="True">
+              <Node name="Images" expanded="True" />
+              <Node name="Words" expanded="True" />
+            </Node>
+            <Node name="Hangman-Game" expanded="True">
+              <Node name="UserInterface" expanded="True" />
+              <Node name="Properties" expanded="True" />
+              <Node name="GameEngine.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State name="__root__">
+          <Node name="Hangman-Game" expanded="True" selected="True">
+            <Node name="Hangman-Game" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

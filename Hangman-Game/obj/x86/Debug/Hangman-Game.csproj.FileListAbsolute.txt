@@ -1,0 +1,6 @@
+/mnt/Entertainment/Libraries/Coding-Projects/MonoDevelop/Hangman-Game/Hangman-Game/bin/Debug/Hangman-Game.exe
+/mnt/Entertainment/Libraries/Coding-Projects/MonoDevelop/Hangman-Game/Hangman-Game/bin/Debug/Hangman-Game.pdb
+/mnt/Entertainment/Libraries/Coding-Projects/MonoDevelop/Hangman-Game/Hangman-Game/obj/x86/Debug/Hangman-Game.csprojAssemblyReference.cache
+/mnt/Entertainment/Libraries/Coding-Projects/MonoDevelop/Hangman-Game/Hangman-Game/obj/x86/Debug/Hangman-Game.csproj.CoreCompileInputs.cache
+/mnt/Entertainment/Libraries/Coding-Projects/MonoDevelop/Hangman-Game/Hangman-Game/obj/x86/Debug/Hangman-Game.exe
+/mnt/Entertainment/Libraries/Coding-Projects/MonoDevelop/Hangman-Game/Hangman-Game/obj/x86/Debug/Hangman-Game.pdb
