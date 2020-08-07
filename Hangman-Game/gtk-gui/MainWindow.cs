@@ -7,19 +7,27 @@ public partial class MainWindow
 
 	private global::Gtk.VBox vbox1;
 
-	private global::Gtk.Image image5;
+	private global::Gtk.Image hangmanImage;
 
-	private global::Gtk.Label label1;
+	private global::Gtk.Label wordText;
 
 	private global::Gtk.VBox vbox3;
 
 	private global::Gtk.ScrolledWindow GtkScrolledWindow;
 
-	private global::Gtk.TextView textview3;
+	private global::Gtk.TextView resultText;
+
+	private global::Gtk.Label guessesRemaining;
+
+	private global::Gtk.Label gameOverText;
+
+	private global::Gtk.HBox hbox1;
 
 	private global::Gtk.Entry inputText;
 
-	private global::Gtk.Button button3;
+	private global::Gtk.Button enterButton;
+
+	private global::Gtk.Button quitButton;
 
 	protected virtual void Build()
 	{
@@ -27,32 +35,30 @@ public partial class MainWindow
 		// Widget MainWindow
 		this.Name = "MainWindow";
 		this.Title = global::Mono.Unix.Catalog.GetString("Hangman");
-		this.Icon = global::Stetic.IconLoader.LoadIcon(this, "gtk-bold", global::Gtk.IconSize.Menu);
+		this.Icon = global::Gdk.Pixbuf.LoadFromResource("HangmanGame.Resources.images.program_icon.png");
 		this.WindowPosition = ((global::Gtk.WindowPosition)(4));
+		this.AllowShrink = true;
 		this.DefaultWidth = 800;
 		this.DefaultHeight = 475;
 		// Container child MainWindow.Gtk.Container+ContainerChild
 		this.hpaned1 = new global::Gtk.HPaned();
 		this.hpaned1.CanFocus = true;
 		this.hpaned1.Name = "hpaned1";
-		this.hpaned1.Position = 196;
+		this.hpaned1.Position = 600;
 		// Container child hpaned1.Gtk.Paned+PanedChild
 		this.vbox1 = new global::Gtk.VBox();
-		this.vbox1.Name = "vbox1";
 		this.vbox1.Spacing = 6;
 		// Container child vbox1.Gtk.Box+BoxChild
-		this.image5 = new global::Gtk.Image();
-		this.image5.Name = "image5";
-		this.vbox1.Add(this.image5);
-		global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.image5]));
-		w1.Position = 0;
-		w1.Expand = false;
-		w1.Fill = false;
+		this.hangmanImage = new global::Gtk.Image();
+		this.hangmanImage.Name = "hangmanImage";
+		this.vbox1.Add(this.hangmanImage);
+		global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.hangmanImage]));
+		w1.Position = 1;
 		// Container child vbox1.Gtk.Box+BoxChild
-		this.label1 = new global::Gtk.Label();
-		this.label1.Name = "label1";
-		this.vbox1.Add(this.label1);
-		global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.label1]));
+		this.wordText = new global::Gtk.Label();
+		this.wordText.Name = "wordText";
+		this.vbox1.Add(this.wordText);
+		global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.wordText]));
 		w2.Position = 2;
 		w2.Expand = false;
 		w2.Fill = false;
@@ -68,44 +74,87 @@ public partial class MainWindow
 		this.GtkScrolledWindow.Name = "GtkScrolledWindow";
 		this.GtkScrolledWindow.ShadowType = ((global::Gtk.ShadowType)(1));
 		// Container child GtkScrolledWindow.Gtk.Container+ContainerChild
-		this.textview3 = new global::Gtk.TextView();
-		this.textview3.Name = "textview3";
-		this.textview3.Editable = false;
-		this.textview3.CursorVisible = false;
-		this.GtkScrolledWindow.Add(this.textview3);
+		this.resultText = new global::Gtk.TextView();
+		this.resultText.Buffer.Text = global::Mono.Unix.Catalog.GetString("Awaiting your attempt...");
+		this.resultText.Name = "resultText";
+		this.resultText.Editable = false;
+		this.resultText.CursorVisible = false;
+		this.GtkScrolledWindow.Add(this.resultText);
 		this.vbox3.Add(this.GtkScrolledWindow);
 		global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.GtkScrolledWindow]));
 		w5.Position = 0;
 		// Container child vbox3.Gtk.Box+BoxChild
+		this.guessesRemaining = new global::Gtk.Label();
+		this.guessesRemaining.Name = "guessesRemaining";
+		this.guessesRemaining.LabelProp = global::Mono.Unix.Catalog.GetString("Guesses Remaining: 6");
+		this.vbox3.Add(this.guessesRemaining);
+		global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.guessesRemaining]));
+		w6.Position = 1;
+		w6.Expand = false;
+		w6.Fill = false;
+		// Container child vbox3.Gtk.Box+BoxChild
+		this.gameOverText = new global::Gtk.Label();
+		this.gameOverText.Name = "gameOverText";
+		this.gameOverText.LabelProp = global::Mono.Unix.Catalog.GetString("GAME OVER!!!");
+		this.vbox3.Add(this.gameOverText);
+		global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.gameOverText]));
+		w7.Position = 2;
+		w7.Expand = false;
+		w7.Fill = false;
+		// Container child vbox3.Gtk.Box+BoxChild
+		this.hbox1 = new global::Gtk.HBox();
+		this.hbox1.Name = "hbox1";
+		this.hbox1.Spacing = 6;
+		// Container child hbox1.Gtk.Box+BoxChild
 		this.inputText = new global::Gtk.Entry();
 		this.inputText.CanFocus = true;
 		this.inputText.Name = "inputText";
 		this.inputText.IsEditable = true;
 		this.inputText.InvisibleChar = '•';
-		this.vbox3.Add(this.inputText);
-		global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.inputText]));
-		w6.Position = 1;
-		w6.Expand = false;
-		w6.Fill = false;
-		// Container child vbox3.Gtk.Box+BoxChild
-		this.button3 = new global::Gtk.Button();
-		this.button3.CanFocus = true;
-		this.button3.Name = "button3";
-		this.button3.UseStock = true;
-		this.button3.UseUnderline = true;
-		this.button3.Label = "gtk-ok";
-		this.vbox3.Add(this.button3);
-		global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.button3]));
-		w7.Position = 2;
-		w7.Expand = false;
-		w7.Fill = false;
+		this.hbox1.Add(this.inputText);
+		global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.inputText]));
+		w8.Position = 0;
+		// Container child hbox1.Gtk.Box+BoxChild
+		this.enterButton = new global::Gtk.Button();
+		this.enterButton.CanFocus = true;
+		this.enterButton.Name = "enterButton";
+		this.enterButton.UseStock = true;
+		this.enterButton.UseUnderline = true;
+		this.enterButton.Label = "gtk-ok";
+		this.hbox1.Add(this.enterButton);
+		global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.enterButton]));
+		w9.Position = 1;
+		w9.Expand = false;
+		w9.Fill = false;
+		// Container child hbox1.Gtk.Box+BoxChild
+		this.quitButton = new global::Gtk.Button();
+		this.quitButton.CanFocus = true;
+		this.quitButton.Name = "quitButton";
+		this.quitButton.UseStock = true;
+		this.quitButton.UseUnderline = true;
+		this.quitButton.Label = "gtk-quit";
+		this.hbox1.Add(this.quitButton);
+		global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.quitButton]));
+		w10.Position = 2;
+		w10.Expand = false;
+		w10.Fill = false;
+		this.vbox3.Add(this.hbox1);
+		global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.hbox1]));
+		w11.Position = 3;
+		w11.Expand = false;
+		w11.Fill = false;
 		this.hpaned1.Add(this.vbox3);
 		this.Add(this.hpaned1);
 		if ((this.Child != null))
 		{
 			this.Child.ShowAll();
 		}
+		this.gameOverText.Hide();
+		this.quitButton.Hide();
 		this.Show();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler(this.OnDeleteEvent);
+		this.inputText.Activated += new global::System.EventHandler(this.OnEnter);
+		this.enterButton.Clicked += new global::System.EventHandler(this.OnEnter);
+		this.quitButton.Clicked += new global::System.EventHandler(this.OnQuit);
 	}
 }

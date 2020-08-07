@@ -9,46 +9,74 @@ namespace HangmanGame
     public class GameEngine
     {
 
-
-        private static List<string> hangman = new List<string>();
+        private static List<string> hangman;
         private static int hangCount = 0;
         private static List<Char> guesses = new List<Char>();
         private static StringBuilder correctGuesses = new StringBuilder();
         private static List<string> wordsUsed = new List<string>();
         private static string chosenWord;
-        private static string blurredWord;
+        private static StringBuilder blurredWord = new StringBuilder();
         private static int wins;
         private static int losses;
-        //private static Scanner input = new Scanner(System.in);
+        private static Boolean winorloss;
 
-        static String GetBlurredWord()
+        public static String GetBlurredWord()
         {
-            return blurredWord;
+            return blurredWord.ToString();
         }
 
-        static String GetGuessesRemaining()
+        public static String GetGuessesRemaining()
         {
             return "You have " + Math.Abs(hangCount - 6) + " incorrect guess(es) remaining before you lose...";
         }
 
-        static int GetHangCount()
+        public static int GetHangCount()
         {
             return hangCount;
         }
 
-        static String GetGameResults()
+        public static Boolean GetWinOrLoss()
+        {
+            return winorloss;
+        }
+
+        public static String GetGameResults()
         {
             string feedback;
             feedback = "You have " + wins + " wins" + " and " + losses + " losses.";
-            return feedback + "\n" + "The words used so far have been: " + wordsUsed + "\n" + "Enter 'play' or 'exit'";
+            StringBuilder words = new StringBuilder();
+            foreach(string s in wordsUsed)
+            {
+                if (words.Length != 0)
+                {
+                    words.Append(", " + s);
+                }
+                else
+                {
+                    words.Append(s);
+                }
+            }
+            return feedback + "\n" + "The words used so far have been: " + words;
         }
 
-        GameEngine()
+        public GameEngine()
         {
             LoadFile();
 
             chosenWord = WordSelection();
-            blurredWord = chosenWord.Replace("[^ " + correctGuesses + "]", "*");
+            //Replaces every character that hasn't already been guessed with an '*'
+            blurredWord.Clear();
+            foreach (char temp in chosenWord)
+            {
+                if (!correctGuesses.ToString().Contains(temp))
+                {
+                    blurredWord.Append("*");
+                }
+                else
+                {
+                    blurredWord.Append(temp);
+                }
+            }
         }
 
         private static String WordSelection()
@@ -64,9 +92,10 @@ namespace HangmanGame
         private static void LoadFile()
         {
             //load array of hangman words to choose from
-            if (File.Exists("src/assets/hangman.txt"))
+            if (File.Exists("Resources/test-words/hangman.txt"))
             {
-                string[] file = File.ReadAllLines(@"src/assets/hangman.txt", Encoding.UTF8);
+                var file = File.ReadAllLines(@"Resources/test-words/hangman.txt", Encoding.UTF8);
+                hangman = new List<string>(file);
             }
             else
             {
@@ -75,11 +104,22 @@ namespace HangmanGame
             }
         }
 
-        static String GuessAction(char guess)
+        public static String GuessAction(char guess)
         {
             //Create blurred word to show to user
-            //blurredWord = chosenWord.ReplaceAll("[^ " + correctGuesses + "]", "*");
-            blurredWord = chosenWord.Replace("[^ " + correctGuesses + "]", "*");
+            //Replaces every character that hasn't already been guessed with an '*'
+            blurredWord.Clear();
+            foreach (char temp in chosenWord)
+            {
+                if (!correctGuesses.ToString().Contains(temp))
+                {
+                    blurredWord.Append("*");
+                }
+                else
+                {
+                    blurredWord.Append(temp);
+                }
+            }
             //Input error catching
             if (char.IsDigit(guess)){
                 return "Please enter an alphabetic letter. ";
@@ -88,13 +128,29 @@ namespace HangmanGame
             {
                 return "You have already guessed '" + guess + "'... Try another...";
             }
+            if (guess.Equals(""))
+            {
+                return "Please enter a character into the field.";
+            }
             guesses.Add(guess);
             //If your guess is correct, make sure you cannot guess it again
-            if (chosenWord.Contains("" + guess) && !chosenWord.Equals(blurredWord, StringComparison.CurrentCultureIgnoreCase))
+            if (chosenWord.Contains("" + guess) && !chosenWord.Equals(blurredWord.ToString(), StringComparison.CurrentCultureIgnoreCase))
             {
                 correctGuesses.Append(guess);
-                blurredWord = chosenWord.Replace("[^ " + correctGuesses + "]", "*");
-                if (!chosenWord.Equals(blurredWord, StringComparison.CurrentCultureIgnoreCase))
+                //Replaces every character that hasn't already been guessed with an '*'
+                blurredWord.Clear();
+                foreach (char temp in chosenWord)
+                {
+                    if (!correctGuesses.ToString().Contains(temp))
+                    {
+                        blurredWord.Append("*");
+                    }
+                    else
+                    {
+                        blurredWord.Append(temp);
+                    }
+                }
+                if (!chosenWord.Equals(blurredWord.ToString(), StringComparison.CurrentCultureIgnoreCase))
                 {
                     return "'" + guess + "' is in the word. You have guessed correctly!";
                 }
@@ -106,16 +162,18 @@ namespace HangmanGame
                 if (hangCount == 6)
                 {
                     losses++;
+                    winorloss = false;
                     return "You have been hung! May you rest in peace..."
                         + "\n" + "Would you like to play again?";
                 }
                 return "Sorry, '" + guess + "' is not in the word...";
             }
             //If you guess the word in its entirety, win sequence
-            if (chosenWord.Equals(blurredWord, StringComparison.CurrentCultureIgnoreCase))
+            if (chosenWord.Equals(blurredWord.ToString(), StringComparison.CurrentCultureIgnoreCase))
             {
                 // GAME OVER
                 wins++;
+                winorloss = true;
                 return "You have successfully avoided death! Yay surviving!"
                     + "\n" + "You had " + hangCount + " miss(es)."
                     + "\n" + "Would you like to play again?";
@@ -123,19 +181,26 @@ namespace HangmanGame
             return "Awaiting your attempt...";
         }
 
-        static void GameOver(String playAgain)
+        public static void GameOver(String playAgain)
         {
-            //If user chose to exit, do so here
-            if (playAgain.Contains("exit"))
-            {
-                Environment.Exit(0);
-            }
             //User has optioned to continue playing, add word used to bank and clear all variables for a replay
             hangCount = 0;
             guesses.Clear();
             correctGuesses.Clear();
             chosenWord = WordSelection();
-            blurredWord = chosenWord.Replace("[^ " + correctGuesses + "]", "*");
+            //Replaces every character that hasn't already been guessed with an '*'
+            blurredWord.Clear();
+            foreach (char temp in chosenWord)
+            {
+                if (!correctGuesses.ToString().Contains(temp))
+                {
+                    blurredWord.Append("*");
+                }
+                else
+                {
+                    blurredWord.Append(temp);
+                }
+            }
         }
 
     }
