@@ -97,5 +97,9 @@
     <Folder Include="Resources\images\" />
     <Folder Include="Resources\test-words\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web References\https:\api.twitter.com\1.1\trends\place.json\Reference.map" />
+    <Content Include="Web References\https:\api.twitter.com\1.1\trends\place.json\tempconvert.wsdl" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
