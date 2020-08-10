@@ -13,8 +13,6 @@ public partial class MainWindow
 
 	private global::Gtk.VBox vbox3;
 
-	private global::Gtk.ScrolledWindow GtkScrolledWindow;
-
 	private global::Gtk.TextView resultText;
 
 	private global::Gtk.Label guessesRemaining;
@@ -44,7 +42,7 @@ public partial class MainWindow
 		this.hpaned1 = new global::Gtk.HPaned();
 		this.hpaned1.CanFocus = true;
 		this.hpaned1.Name = "hpaned1";
-		this.hpaned1.Position = 600;
+		this.hpaned1.Position = 350;
 		// Container child hpaned1.Gtk.Paned+PanedChild
 		this.vbox1 = new global::Gtk.VBox();
 		this.vbox1.Spacing = 6;
@@ -54,13 +52,14 @@ public partial class MainWindow
 		this.vbox1.Add(this.hangmanImage);
 		global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.hangmanImage]));
 		w1.Position = 1;
+		w1.Expand = false;
+		w1.Fill = false;
 		// Container child vbox1.Gtk.Box+BoxChild
 		this.wordText = new global::Gtk.Label();
 		this.wordText.Name = "wordText";
 		this.vbox1.Add(this.wordText);
 		global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.wordText]));
 		w2.Position = 2;
-		w2.Expand = false;
 		w2.Fill = false;
 		this.hpaned1.Add(this.vbox1);
 		global::Gtk.Paned.PanedChild w3 = ((global::Gtk.Paned.PanedChild)(this.hpaned1[this.vbox1]));
@@ -70,37 +69,34 @@ public partial class MainWindow
 		this.vbox3.Name = "vbox3";
 		this.vbox3.Spacing = 6;
 		// Container child vbox3.Gtk.Box+BoxChild
-		this.GtkScrolledWindow = new global::Gtk.ScrolledWindow();
-		this.GtkScrolledWindow.Name = "GtkScrolledWindow";
-		this.GtkScrolledWindow.ShadowType = ((global::Gtk.ShadowType)(1));
-		// Container child GtkScrolledWindow.Gtk.Container+ContainerChild
 		this.resultText = new global::Gtk.TextView();
 		this.resultText.Buffer.Text = global::Mono.Unix.Catalog.GetString("Awaiting your attempt...");
 		this.resultText.Name = "resultText";
 		this.resultText.Editable = false;
 		this.resultText.CursorVisible = false;
-		this.GtkScrolledWindow.Add(this.resultText);
-		this.vbox3.Add(this.GtkScrolledWindow);
-		global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.GtkScrolledWindow]));
-		w5.Position = 0;
+		this.resultText.Justification = ((global::Gtk.Justification)(2));
+		this.resultText.WrapMode = ((global::Gtk.WrapMode)(2));
+		this.vbox3.Add(this.resultText);
+		global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.resultText]));
+		w4.Position = 0;
 		// Container child vbox3.Gtk.Box+BoxChild
 		this.guessesRemaining = new global::Gtk.Label();
 		this.guessesRemaining.Name = "guessesRemaining";
 		this.guessesRemaining.LabelProp = global::Mono.Unix.Catalog.GetString("Guesses Remaining: 6");
 		this.vbox3.Add(this.guessesRemaining);
-		global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.guessesRemaining]));
-		w6.Position = 1;
-		w6.Expand = false;
-		w6.Fill = false;
+		global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.guessesRemaining]));
+		w5.Position = 1;
+		w5.Expand = false;
+		w5.Fill = false;
 		// Container child vbox3.Gtk.Box+BoxChild
 		this.gameOverText = new global::Gtk.Label();
 		this.gameOverText.Name = "gameOverText";
 		this.gameOverText.LabelProp = global::Mono.Unix.Catalog.GetString("GAME OVER!!!");
 		this.vbox3.Add(this.gameOverText);
-		global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.gameOverText]));
-		w7.Position = 2;
-		w7.Expand = false;
-		w7.Fill = false;
+		global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.gameOverText]));
+		w6.Position = 2;
+		w6.Expand = false;
+		w6.Fill = false;
 		// Container child vbox3.Gtk.Box+BoxChild
 		this.hbox1 = new global::Gtk.HBox();
 		this.hbox1.Name = "hbox1";
@@ -112,8 +108,8 @@ public partial class MainWindow
 		this.inputText.IsEditable = true;
 		this.inputText.InvisibleChar = '•';
 		this.hbox1.Add(this.inputText);
-		global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.inputText]));
-		w8.Position = 0;
+		global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.inputText]));
+		w7.Position = 0;
 		// Container child hbox1.Gtk.Box+BoxChild
 		this.enterButton = new global::Gtk.Button();
 		this.enterButton.CanFocus = true;
@@ -122,10 +118,10 @@ public partial class MainWindow
 		this.enterButton.UseUnderline = true;
 		this.enterButton.Label = "gtk-ok";
 		this.hbox1.Add(this.enterButton);
-		global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.enterButton]));
-		w9.Position = 1;
-		w9.Expand = false;
-		w9.Fill = false;
+		global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.enterButton]));
+		w8.Position = 1;
+		w8.Expand = false;
+		w8.Fill = false;
 		// Container child hbox1.Gtk.Box+BoxChild
 		this.quitButton = new global::Gtk.Button();
 		this.quitButton.CanFocus = true;
@@ -134,15 +130,15 @@ public partial class MainWindow
 		this.quitButton.UseUnderline = true;
 		this.quitButton.Label = "gtk-quit";
 		this.hbox1.Add(this.quitButton);
-		global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.quitButton]));
-		w10.Position = 2;
+		global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.quitButton]));
+		w9.Position = 2;
+		w9.Expand = false;
+		w9.Fill = false;
+		this.vbox3.Add(this.hbox1);
+		global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.hbox1]));
+		w10.Position = 3;
 		w10.Expand = false;
 		w10.Fill = false;
-		this.vbox3.Add(this.hbox1);
-		global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.hbox1]));
-		w11.Position = 3;
-		w11.Expand = false;
-		w11.Fill = false;
 		this.hpaned1.Add(this.vbox3);
 		this.Add(this.hpaned1);
 		if ((this.Child != null))

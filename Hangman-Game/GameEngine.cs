@@ -181,7 +181,7 @@ namespace HangmanGame
             return "Awaiting your attempt...";
         }
 
-        public static void GameOver(String playAgain)
+        public static void GameOver()
         {
             //User has optioned to continue playing, add word used to bank and clear all variables for a replay
             hangCount = 0;

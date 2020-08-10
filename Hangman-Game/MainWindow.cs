@@ -8,22 +8,22 @@ public partial class MainWindow : Gtk.Window
     {
         Build();
         wordText.Text = GameEngine.GetBlurredWord();
-        hangmanImage.Pixbuf = new Gdk.Pixbuf("Resources/images/Hangman_Empty.png");
+        hangmanImage.Pixbuf = new Gdk.Pixbuf("Resources/images/Hangman_Empty.png", 400, 400);
     }
 
-    protected void OnDeleteEvent(object sender, DeleteEventArgs a)
+    private void OnDeleteEvent(object sender, DeleteEventArgs a)
     {
         Application.Quit();
         a.RetVal = true;
     }
 
-    protected void OnEnter(object sender, EventArgs e)
+    private void OnEnter(object sender, EventArgs e)
     {
         string rawInput = inputText.Text;
-        //This if-else ensures that if the game is over, the program catches 'play' or 'exit' input instead of a letter
+        //This if-else ensures that if the game is over, the program responds accordingly
         if (gameOverText.Visible)
         {
-            GameEngine.GameOver(rawInput);
+            GameEngine.GameOver();
             wordText.Text = GameEngine.GetBlurredWord();
             guessesRemaining.Text = GameEngine.GetGuessesRemaining();
             gameOverText.Visible = false;
@@ -63,25 +63,25 @@ public partial class MainWindow : Gtk.Window
         switch (hangCount)
         {
             case 1:
-                hangmanImage.Pixbuf = new Gdk.Pixbuf("Resources/images/Hangman_One.png");
+                hangmanImage.Pixbuf = new Gdk.Pixbuf("Resources/images/Hangman_One.png", 400, 400);
                 break;
             case 2:
-                hangmanImage.Pixbuf = new Gdk.Pixbuf("Resources/images/Hangman_Two.png");
+                hangmanImage.Pixbuf = new Gdk.Pixbuf("Resources/images/Hangman_Two.png", 400, 400);
                 break;
             case 3:
-                hangmanImage.Pixbuf = new Gdk.Pixbuf("Resources/images/Hangman_Three.png");
+                hangmanImage.Pixbuf = new Gdk.Pixbuf("Resources/images/Hangman_Three.png", 400, 400);
                 break;
             case 4:
-                hangmanImage.Pixbuf = new Gdk.Pixbuf("Resources/images/Hangman_Four.png");
+                hangmanImage.Pixbuf = new Gdk.Pixbuf("Resources/images/Hangman_Four.png", 400, 400);
                 break;
             case 5:
-                hangmanImage.Pixbuf = new Gdk.Pixbuf("Resources/images/Hangman_Five.png");
+                hangmanImage.Pixbuf = new Gdk.Pixbuf("Resources/images/Hangman_Five.png", 400, 400);
                 break;
             case 6:
-                hangmanImage.Pixbuf = new Gdk.Pixbuf("Resources/images/Hangman_Six.png");
+                hangmanImage.Pixbuf = new Gdk.Pixbuf("Resources/images/Hangman_Six.png", 400, 400);
                 break;
             default:
-                hangmanImage.Pixbuf = new Gdk.Pixbuf("Resources/images/Hangman_Empty.png");
+                hangmanImage.Pixbuf = new Gdk.Pixbuf("Resources/images/Hangman_Empty.png", 400, 400);
                 break;
         }
         //Prevents having to click the text box after every input
@@ -89,7 +89,7 @@ public partial class MainWindow : Gtk.Window
         inputText.IsFocus = true;
     }
 
-    protected void OnQuit(object sender, EventArgs e)
+    private void OnQuit(object sender, EventArgs e)
     {
         Application.Quit();
     }
