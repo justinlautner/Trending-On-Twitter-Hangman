@@ -348,4 +348,12 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+#Personal
 /.idea/
+Hangman-Game/src/TwitterAPI/APIKeysLocal.cs
+.nuget/
+_ReSharper.*
+packages/
+*DS_Store
+*.sln.ide
