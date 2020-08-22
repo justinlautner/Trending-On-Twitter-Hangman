@@ -110,6 +110,7 @@
     <Compile Include="src\TwitterAPI\Root.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="bin\Debug\Resources\twitter-words" />
     <Folder Include="Resources\" />
     <Folder Include="Resources\images\" />
     <Folder Include="Resources\test-words\" />

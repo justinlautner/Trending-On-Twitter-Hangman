@@ -60,8 +60,9 @@ namespace HangmanGame
 
         public GameEngine(List<string> saveWordList)
         {
-            //LoadFile();
 
+            hangman = saveWordList;
+            
             chosenWord = WordSelection();
             //Replaces every character that hasn't already been guessed with an '*'
             blurredWord.Clear();
@@ -87,21 +88,6 @@ namespace HangmanGame
             wordsUsed.Add(word);
             return word;
         }
-        
-        /*private static void LoadFile()
-        {
-            //load array of hangman words to choose from
-            if (File.Exists("Resources/test-words/hangman.txt"))
-            {
-                var file = File.ReadAllLines(@"Resources/test-words/hangman.txt", Encoding.UTF8);
-                hangman = new List<string>(file);
-            }
-            else
-            {
-                Console.Write("The file \"hangman.txt\" is missing. Aborting...");
-                Environment.Exit(1);
-            }
-        }*/
 
         public static String GuessAction(char guess)
         {
@@ -114,15 +100,19 @@ namespace HangmanGame
                 {
                     blurredWord.Append("*");
                 }
+                if (Char.IsWhiteSpace(temp))
+                {
+                    blurredWord.Append(" ");
+                }
                 else
                 {
                     blurredWord.Append(temp);
                 }
             }
             //Input error catching
-            if (char.IsDigit(guess)){
+            /*if (char.IsDigit(guess)){
                 return "Please enter an alphabetic letter. ";
-            }
+            }*/
             if (guesses.Contains(guess))
             {
                 return "You have already guessed '" + guess + "'... Try another...";
@@ -143,6 +133,10 @@ namespace HangmanGame
                     if (!correctGuesses.ToString().Contains(temp))
                     {
                         blurredWord.Append("*");
+                    }
+                    if (Char.IsWhiteSpace(temp))
+                    {
+                        blurredWord.Append(" ");
                     }
                     else
                     {
@@ -194,6 +188,10 @@ namespace HangmanGame
                 if (!correctGuesses.ToString().Contains(temp))
                 {
                     blurredWord.Append("*");
+                }
+                if (Char.IsWhiteSpace(temp))
+                {
+                    blurredWord.Append(" ");
                 }
                 else
                 {
