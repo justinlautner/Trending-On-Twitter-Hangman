@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace HangmanGame
 {
@@ -60,11 +58,11 @@ namespace HangmanGame
             return feedback + "\n" + "The words used so far have been: " + words;
         }
 
-        public GameEngine()
+        public GameEngine(List<string> saveWordList)
         {
-            //LoadFile();
-            LoadTwitterTrends();
 
+            hangman = saveWordList;
+            
             chosenWord = WordSelection();
             //Replaces every character that hasn't already been guessed with an '*'
             blurredWord.Clear();
@@ -91,27 +89,6 @@ namespace HangmanGame
             return word;
         }
 
-        private async Task LoadTwitterTrends()
-        {
-            var twitter = await TrendingOnTwitter.LoadTrending();
-            
-            Console.WriteLine(twitter.ToString());
-        }
-        /*private static void LoadFile()
-        {
-            //load array of hangman words to choose from
-            if (File.Exists("Resources/test-words/hangman.txt"))
-            {
-                var file = File.ReadAllLines(@"Resources/test-words/hangman.txt", Encoding.UTF8);
-                hangman = new List<string>(file);
-            }
-            else
-            {
-                Console.Write("The file \"hangman.txt\" is missing. Aborting...");
-                Environment.Exit(1);
-            }
-        }*/
-
         public static String GuessAction(char guess)
         {
             //Create blurred word to show to user
@@ -123,15 +100,19 @@ namespace HangmanGame
                 {
                     blurredWord.Append("*");
                 }
+                if (Char.IsWhiteSpace(temp))
+                {
+                    blurredWord.Append(" ");
+                }
                 else
                 {
                     blurredWord.Append(temp);
                 }
             }
             //Input error catching
-            if (char.IsDigit(guess)){
+            /*if (char.IsDigit(guess)){
                 return "Please enter an alphabetic letter. ";
-            }
+            }*/
             if (guesses.Contains(guess))
             {
                 return "You have already guessed '" + guess + "'... Try another...";
@@ -152,6 +133,10 @@ namespace HangmanGame
                     if (!correctGuesses.ToString().Contains(temp))
                     {
                         blurredWord.Append("*");
+                    }
+                    if (Char.IsWhiteSpace(temp))
+                    {
+                        blurredWord.Append(" ");
                     }
                     else
                     {
@@ -203,6 +188,10 @@ namespace HangmanGame
                 if (!correctGuesses.ToString().Contains(temp))
                 {
                     blurredWord.Append("*");
+                }
+                if (Char.IsWhiteSpace(temp))
+                {
+                    blurredWord.Append(" ");
                 }
                 else
                 {
