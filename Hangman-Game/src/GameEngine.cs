@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace HangmanGame
 {
@@ -60,10 +58,9 @@ namespace HangmanGame
             return feedback + "\n" + "The words used so far have been: " + words;
         }
 
-        public GameEngine()
+        public GameEngine(List<string> saveWordList)
         {
             //LoadFile();
-            LoadTwitterTrends();
 
             chosenWord = WordSelection();
             //Replaces every character that hasn't already been guessed with an '*'
@@ -90,13 +87,7 @@ namespace HangmanGame
             wordsUsed.Add(word);
             return word;
         }
-
-        private async Task LoadTwitterTrends()
-        {
-            var twitter = await TrendingOnTwitter.LoadTrending();
-            
-            Console.WriteLine(twitter.ToString());
-        }
+        
         /*private static void LoadFile()
         {
             //load array of hangman words to choose from

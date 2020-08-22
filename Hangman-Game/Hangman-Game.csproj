@@ -101,20 +101,19 @@
     <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="gtk-gui\MainWindow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\APIHelper.cs" />
     <Compile Include="src\GameEngine.cs" />
     <Compile Include="src\MainWindow.cs" />
     <Compile Include="src\Program.cs" />
-    <Compile Include="src\TrendingOnTwitter.cs" />
     <Compile Include="src\TwitterAPI\APIKeys.cs" />
     <Compile Include="src\TwitterAPI\APIKeysLocal.cs" />
+    <Compile Include="src\TwitterAPI\GetTwitterTrends.cs" />
     <Compile Include="src\TwitterAPI\Root.cs" />
-    <Compile Include="src\TwitterModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Resources\images\" />
     <Folder Include="Resources\test-words\" />
+    <Folder Include="Resources\twitter-words" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\packages.config" />
