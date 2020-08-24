@@ -21,17 +21,17 @@ namespace HangmanGame.TwitterAPI
         public GetTwitterTrends()
         {
             
-            if (File.Exists("Resources/twitter-words/twitter-hangman.txt"))
+            /*if (File.Exists("Resources/twitter-words/twitter-hangman.txt"))
             {
-                /*//Re-use the same list throughout the day, as Twitter API usage is rate limited (could block out user)
+                //Re-use the same list throughout the day, as Twitter API usage is rate limited (could block out user)
                  //This is unnecessary for now, current rate limit is 75/15min
                 if ((File.GetLastWriteTime("Resources/twitter-words/twitter-hangman.txt") - DateTime.Now).TotalDays < 1)
                 {
                     
-                }*/
+                }
                 saveWordsList = File.ReadAllLines("Resources/twitter-words/twitter-hangman.txt").ToList();
                 return;
-            }
+            }*/
             
             var client = new RestClient("https://api.twitter.com");
             var request = new RestRequest("1.1/trends/place.json?id=2430683", Method.GET);
@@ -41,14 +41,25 @@ namespace HangmanGame.TwitterAPI
             Console.WriteLine(response.ResponseStatus);
 
             //TODO: Replace console writing with GUI updating
+            //TODO: File saving not functional
             if (response.ContentLength == 0)
             {
-                Console.WriteLine("NO DATA WAS RETURNED FROM TWITTER!" + "/n" + "RESORTING TO RANDOM WORD LIST!");
+                Console.WriteLine("NO DATA WAS RETURNED FROM TWITTER!" + "/n" + "RESORTING TO SAVE OR RANDOM WORD LIST!");
+                if (File.Exists("Resources/twitter-words/twitter-hangman.txt"))
+                {
+                    saveWordsList = File.ReadAllLines("Resources/twitter-words/twitter-hangman.txt").ToList();
+                    return;
+                }
                 LoadRandomWordList();
             }
             else if (!response.IsSuccessful)
             {
-                Console.Error.WriteLine("TWITTER'S RESPONSE WAS UNSUCCESSFUL!" + "/n" + "RESORTING TO RANDOM WORD LIST!");
+                Console.Error.WriteLine("TWITTER'S RESPONSE WAS UNSUCCESSFUL!" + "/n" + "RESORTING TO SAVE OR RANDOM WORD LIST!");
+                if (File.Exists("Resources/twitter-words/twitter-hangman.txt"))
+                {
+                    saveWordsList = File.ReadAllLines("Resources/twitter-words/twitter-hangman.txt").ToList();
+                    return;
+                }
                 LoadRandomWordList();
             }
             
@@ -58,7 +69,6 @@ namespace HangmanGame.TwitterAPI
                 {
                     foreach (var trend in dataPoint.trends)
                     {
-                        //TODO: Remove hashtags (#) and handle empty spaces
                         string str = trend.name;
                         if (trend.name.Contains("#"))
                         {
@@ -84,8 +94,8 @@ namespace HangmanGame.TwitterAPI
                 //Remove outdated trending list if applicable
                 File.Delete("Resources/twitter-words/twitter-hangman.txt");
             }
-            //TODO: Program crashes here: System.IO.DirectoryNotFoundException: Could not find a part of the path
-            File.WriteAllLines(@"Resources/twitter-words/twitter-hangman.txt", saveWordList);
+            Console.WriteLine("is this happening?");
+            File.WriteAllLines("Resources/twitter-words/twitter-hangman.txt", saveWordList);
         }
 
         private void LoadRandomWordList()

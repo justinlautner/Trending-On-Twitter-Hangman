@@ -9,7 +9,7 @@ namespace HangmanGame
     {
 
         private static List<string> hangman;
-        private static int hangCount = 0;
+        private static int hangCount;
         private static List<Char> guesses = new List<Char>();
         private static StringBuilder correctGuesses = new StringBuilder();
         private static List<string> wordsUsed = new List<string>();
@@ -17,7 +17,7 @@ namespace HangmanGame
         private static StringBuilder blurredWord = new StringBuilder();
         private static int wins;
         private static int losses;
-        private static Boolean winorloss;
+        private static bool winorloss;
 
         public static String GetBlurredWord()
         {
@@ -34,7 +34,7 @@ namespace HangmanGame
             return hangCount;
         }
 
-        public static Boolean GetWinOrLoss()
+        public static bool GetWinOrLoss()
         {
             return winorloss;
         }
@@ -68,7 +68,11 @@ namespace HangmanGame
             blurredWord.Clear();
             foreach (char temp in chosenWord)
             {
-                if (!correctGuesses.ToString().Contains(temp))
+                if (Char.IsWhiteSpace(temp))
+                {
+                    blurredWord.Append(" ");
+                }
+                else if (!correctGuesses.ToString().Contains(temp.ToString().ToLower()))
                 {
                     blurredWord.Append("*");
                 }
@@ -96,13 +100,13 @@ namespace HangmanGame
             blurredWord.Clear();
             foreach (char temp in chosenWord)
             {
-                if (!correctGuesses.ToString().Contains(temp))
-                {
-                    blurredWord.Append("*");
-                }
                 if (Char.IsWhiteSpace(temp))
                 {
                     blurredWord.Append(" ");
+                }
+                else if (!correctGuesses.ToString().Contains(temp.ToString().ToLower()))
+                {
+                    blurredWord.Append("*");
                 }
                 else
                 {
@@ -123,20 +127,20 @@ namespace HangmanGame
             }
             guesses.Add(guess);
             //If your guess is correct, make sure you cannot guess it again
-            if (chosenWord.Contains("" + guess) && !chosenWord.Equals(blurredWord.ToString(), StringComparison.CurrentCultureIgnoreCase))
+            if (chosenWord.ToLower().Contains(("" + guess).ToLower()) && !chosenWord.Equals(blurredWord.ToString(), StringComparison.CurrentCultureIgnoreCase))
             {
                 correctGuesses.Append(guess);
                 //Replaces every character that hasn't already been guessed with an '*'
                 blurredWord.Clear();
                 foreach (char temp in chosenWord)
                 {
-                    if (!correctGuesses.ToString().Contains(temp))
-                    {
-                        blurredWord.Append("*");
-                    }
                     if (Char.IsWhiteSpace(temp))
                     {
                         blurredWord.Append(" ");
+                    }
+                    else if (!correctGuesses.ToString().ToLower().Contains(temp.ToString().ToLower()))
+                    {
+                        blurredWord.Append("*");
                     }
                     else
                     {
@@ -171,7 +175,7 @@ namespace HangmanGame
                     + "\n" + "You had " + hangCount + " miss(es)."
                     + "\n" + "Would you like to play again?";
             }
-            return "Awaiting your attempt...";
+            return "Awaiting your attempt... The word could contain digits, letters or some characters (hashtags are omitted)";
         }
 
         public static void GameOver()
@@ -185,13 +189,13 @@ namespace HangmanGame
             blurredWord.Clear();
             foreach (char temp in chosenWord)
             {
-                if (!correctGuesses.ToString().Contains(temp))
-                {
-                    blurredWord.Append("*");
-                }
                 if (Char.IsWhiteSpace(temp))
                 {
                     blurredWord.Append(" ");
+                }
+                else if (!correctGuesses.ToString().ToLower().Contains(temp.ToString().ToLower()))
+                {
+                    blurredWord.Append("*");
                 }
                 else
                 {

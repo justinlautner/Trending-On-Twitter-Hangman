@@ -114,12 +114,10 @@
     <Folder Include="Resources\" />
     <Folder Include="Resources\images\" />
     <Folder Include="Resources\test-words\" />
+    <Folder Include="Resources\twitter-words" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\twitter-words\.gitignore" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
