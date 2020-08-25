@@ -119,5 +119,11 @@
   <ItemGroup>
     <None Include="src\packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Screenshots\clean_slate.png" />
+    <Content Include="Screenshots\game_lose.png" />
+    <Content Include="Screenshots\game_win.png" />
+    <Content Include="Screenshots\mid-game.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
