@@ -1,4 +1,4 @@
-# Hangman-Game
+# Trending On Twitter Hangman Game
 
 ## The classic game of hangman... With a twist! The word list is comprised of real time Twitter trends!
 
