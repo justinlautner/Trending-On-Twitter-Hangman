@@ -101,9 +101,9 @@
     <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="gtk-gui\MainWindow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\GameEngine.cs" />
-    <Compile Include="src\MainWindow.cs" />
-    <Compile Include="src\Program.cs" />
+    <Compile Include="src\Hangman\GameEngine.cs" />
+    <Compile Include="src\Hangman\MainWindow.cs" />
+    <Compile Include="src\Hangman\Program.cs" />
     <Compile Include="src\TwitterAPI\APIKeys.cs" />
     <Compile Include="src\TwitterAPI\APIKeysLocal.cs" />
     <Compile Include="src\TwitterAPI\GetTwitterTrends.cs" />
