@@ -54,7 +54,7 @@ namespace HangmanGame.TwitterAPI
             }
             else if (!response.IsSuccessful)
             {
-                Console.Error.WriteLine("TWITTER'S RESPONSE WAS UNSUCCESSFUL!" + "/n" + "RESORTING TO SAVE OR RANDOM WORD LIST!");
+                Console.Error.WriteLine("TWITTER'S RESPONSE WAS UNSUCCESSFUL!" + "\n" + "RESORTING TO SAVE OR RANDOM WORD LIST!");
                 if (File.Exists("Resources/twitter-words/twitter-hangman.txt"))
                 {
                     saveWordsList = File.ReadAllLines("Resources/twitter-words/twitter-hangman.txt").ToList();
